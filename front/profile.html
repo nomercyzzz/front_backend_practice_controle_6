@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Профиль</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Профиль</h1>
+        <button id="getData">Получить данные</button>
+        <div id="data"></div>
+        <button id="logout">Выйти</button>
+    </div>
+    <script>
+        
+        document.getElementById('getData').onclick = async () => {
+            const response = await fetch('/data');
+            const data = await response.json();
+            document.getElementById('data').innerHTML = `
+                <p>Значение: ${data.value}</p>
+                <p>Время: ${data.time}</p>
+            `;
+        };
+
+        
+
+        document.getElementById('logout').onclick = async () => {
+            await fetch('/logout', { method: 'POST' });
+            window.location = '/';
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Вход</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Вход</h1>
+        <form id="loginForm">
+            <input type="text" placeholder="Логин" required>
+            <input type="password" placeholder="Пароль" required>
+            <button type="submit">Войти</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('loginForm').onsubmit = async (e) => {
+            e.preventDefault();
+            const form = e.target;
+            
+            try {
+                const response = await fetch('/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        username: form[0].value,
+                        password: form[1].value
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.status === 'OK') {
+                    window.location.href = '/profile';
+                } else {
+                    alert(result.message || 'Ошибка входа');
+                }
+            } catch (err) {
+                alert('Ошибка сети: ' + err.message);
+            }
+        };
+        </script>
+</body>
+</html>
