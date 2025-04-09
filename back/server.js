@@ -104,10 +104,7 @@ app.get('/profile', (req, res) => {
 // Данные с кэшированием
 const cacheFile = path.join(__dirname, 'cache/data.json');
 
-// Создаем папку cache, если ее нет
-if (!fs.existsSync(path.dirname(cacheFile))) {
-  fs.mkdirSync(path.dirname(cacheFile), { recursive: true });
-}
+
 
 app.get('/data', (req, res) => {
   try {
