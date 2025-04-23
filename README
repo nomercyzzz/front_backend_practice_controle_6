@@ -13,6 +13,7 @@ bash
 npm install
 
 bash
+сd back
 npm start
 Использование
 Откройте http://localhost:3000 в браузере
